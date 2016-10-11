@@ -1,55 +1,49 @@
-#!/usr/bin/python
+#!/usr/bin/env python2
 
-"""
-This example shows how to create a Mininet object and add nodes to it manually.
-"""
-"Importing Libraries"
 from mininet.net import Mininet
 from mininet.node import Controller
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 
-"Function definition: This is called from the main function"
 def firstNetwork():
 
-    "Create an empty network and add nodes to it."
     net = Mininet()
     info( '*** Adding controller\n' )
     net.addController( 'c0' )
 
     info( '*** Adding hosts\n' )
-    PC1 = net.addHost( 'PC1')
-    
+    PC = {(i + 1): net.addHost('PC{}'.format(i + 1)) for i in range(4)}
+
     info( '*** Adding switch\n' )
-    s14 = net.addSwitch( 's14' )
-    
+    switches = {s: net.addSwitch('s{}{}'.format(*s))
+                for s in {(1, 4), (2, 4), (3, 4)}}
+
     info( '*** Creating links\n' )
-    net.addLink( PC1, s14 )
-    
+    for pc, s in {(PC[1], (1, 4)), (PC[2], (2, 4)), (PC[3], (3, 4)),
+                  (PC[4], (1, 4)), (PC[4], (2, 4)), (PC[4], (3, 4))}:
+        net.addLink(pc, switches[s])
+
+
     info( '*** Starting network\n')
     net.start()
 
-    "This is used to run commands on the hosts"
-
     info( '*** Starting xterm on hosts\n' )
-    PC1.cmd('xterm -xrm \'XTerm.vt100.allowTitleOps: false\' -T PC1 &')
-    PC2.cmd('xterm -xrm \'XTerm.vt100.allowTitleOps: false\' -T PC2 &')
-    PC3.cmd('xterm -xrm \'XTerm.vt100.allowTitleOps: false\' -T PC3 &')
-    PC4.cmd('xterm -xrm \'XTerm.vt100.allowTitleOps: false\' -T PC4 &')
+    for pc in PC.values():
+        pc.cmd('xterm -xrm \'XTerm.vt100.allowTitleOps: false\' -T ' + pc.name + '&')
+
+    for pc in PC.values():
+        pc.cmd('ip addr flush')
 
     info( '*** Running the command line interface\n' )
     CLI( net )
-	
+
     info( '*** Closing the terminals on the hosts\n' )
-    PC1.cmd("killall xterm")
-    PC2.cmd("killall xterm")
-    PC3.cmd("killall xterm")
-    PC4.cmd("killall xterm")
-	
+    for pc in PC.values():
+        pc.cmd("killall xterm")
+
     info( '*** Stopping network' )
     net.stop()
 
-"main Function: This is called when the Python file is run"
 if __name__ == '__main__':
     setLogLevel( 'info' )
     firstNetwork()
