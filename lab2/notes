@@ -1,18 +1,14 @@
 Q1
-h4 is not on the correct network. Found out by trying to ping h4 from h1.
+h3 as a bad mask, being /31 and not /24 as everybody else.
 
 Q2
-When we set the IP for h4. So `ip addr add 10.0.1.4/24 dev PC4-eth0`.
+When we set the IP for h3. So `h3 = net.addHost('h3', ip='10.0.0.3/31')`.
 
 Q3
-`ip addr add 10.0.0.4/24 dev PC4-eth0`.
+```
+ip addr flush dev h3-eth0
+ip addr add 10.0.1.3/24 dev h3-eth0
+```
 
 Q4
 To launch on h1: `ping 10.0.0.2`.
-
-Q5
-Not any.
-
-Q6
-The hub is a device to act as if the connected hosts are on the same cable, so
-the paquets are simply forwarded transparently, thus there is not change.

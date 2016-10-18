@@ -16,7 +16,7 @@ def firstNetwork():
     info( '*** Adding hosts \n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
     h2 = net.addHost( 'h2', ip='10.0.0.2/24' )
-    h3 = net.addHost( 'h3', ip='10.0.0.3/31' )
+    h3 = net.addHost( 'h3', ip='10.0.0.3/24' )
     h4 = net.addHost( 'h4', ip='10.0.1.4/24' )
     PC = {1: h1, 2: h2, 3: h3, 4: h4}
 
@@ -43,21 +43,6 @@ def firstNetwork():
     info('*** ovs-ofctl\n')
     os.system('ovs-ofctl add-flow s12 action=flood')
     os.system('ovs-ofctl add-flow s34 action=normal')
-
-    info('*** set IP\n')
-    for pc in PC.values():
-        for intf in pc.intfNames():
-            pc.cmd('ip addr flush dev {}'.format(intf))
-
-    for i in range(1, 5):
-        pc = PC[i]
-        pc_ip = '10.0.0.{}/24'.format(i)
-        pc.cmd('ip addr add {} dev {}-eth0'.format(pc_ip, pc.name))
-
-    info('*** up interfaces\n')
-    for pc in PC.values():
-        for intf in pc.intfNames():
-            pc.cmd('ip link set {} up'.format(intf))
 
     info( '*** Running the command line interface\n' )
     CLI( net )
