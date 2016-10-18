@@ -20,3 +20,8 @@ Q6
 The hub is a device to act as if the connected hosts are on the same cable, so
 the paquets are simply forwarded transparently, thus there is not change.
 
+Q7	duplicated with Q3
+```
+ip addr flush dev h3-eth0
+ip addr add 10.0.1.3/24 dev h3-eth0
+```

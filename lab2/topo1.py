@@ -42,7 +42,7 @@ def firstNetwork():
 
     info('*** ovs-ofctl\n')
     os.system('ovs-ofctl add-flow s12 action=flood')
-    os.system('ovs-ofctl add-flow s34 action=flood')
+    os.system('ovs-ofctl add-flow s34 action=normal')
 
     info( '*** Running the command line interface\n' )
     CLI( net )
