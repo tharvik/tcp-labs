@@ -1,0 +1,8 @@
+Q1
+h4 is not on the correct network. Found out by trying to ping h4 from h1.
+
+Q2
+When we set the IP for h4. So `ip addr add 10.0.1.4/24 dev PC4-eth0`.
+
+Q3
+`ip addr add 10.0.0.4/24 dev PC4-eth0`.
