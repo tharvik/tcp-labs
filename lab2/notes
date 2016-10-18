@@ -12,3 +12,9 @@ ip addr add 10.0.1.3/24 dev h3-eth0
 
 Q4
 To launch on h1: `ping 10.0.0.2`.
+
+Q5
+h4 do not receive any ICMP request.
+
+Q6
+It is not on the same network (not the correct IP/mask).
