@@ -42,7 +42,7 @@ def firstNetwork():
 
     info('*** ovs-ofctl\n')
     os.system('ovs-ofctl add-flow s12 action=flood')
-    os.system('ovs-ofctl add-flow s34 action=flood')
+    os.system('ovs-ofctl add-flow s34 action=normal')
 
     info('*** set IP\n')
     for pc in PC.values():
@@ -63,7 +63,7 @@ def firstNetwork():
     CLI( net )
 
     info( '*** Closing the terminals on the hosts\n' )
-    for h in PC:
+    for h in PC.values():
         h.cmd("killall xterm")
 
     info( '*** Stopping network' )
