@@ -14,7 +14,9 @@ Q4
 To launch on h1: `ping 10.0.0.2`.
 
 Q5
-h4 do not receive any ICMP request.
+Not any.
 
 Q6
-It is not on the same network (not the correct IP/mask).
+The hub is a device to act as if the connected hosts are on the same cable, so
+the paquets are simply forwarded transparently, thus there is not change.
+
