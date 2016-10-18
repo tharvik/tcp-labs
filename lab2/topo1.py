@@ -49,11 +49,10 @@ def firstNetwork():
         for intf in pc.intfNames():
             pc.cmd('ip addr flush dev {}'.format(intf))
 
-    for i in range(1, 4):
+    for i in range(1, 5):
         pc = PC[i]
         pc_ip = '10.0.0.{}/24'.format(i)
         pc.cmd('ip addr add {} dev {}-eth0'.format(pc_ip, pc.name))
-    PC[4].cmd('ip addr add 10.0.1.4/24 dev {}-eth0'.format(PC[4].name))
 
     info('*** up interfaces\n')
     for pc in PC.values():

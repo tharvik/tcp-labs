@@ -6,3 +6,13 @@ When we set the IP for h4. So `ip addr add 10.0.1.4/24 dev PC4-eth0`.
 
 Q3
 `ip addr add 10.0.0.4/24 dev PC4-eth0`.
+
+Q4
+To launch on h1: `ping 10.0.0.2`.
+
+Q5
+Not any.
+
+Q6
+The hub is a device to act as if the connected hosts are on the same cable, so
+the paquets are simply forwarded transparently, thus there is not change.
