@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+import re
+import math
+import socket
+import sys
+
+HOST_PORT = ('tcpip.epfl.ch', 5003)
+cmd, = sys.argv[1:]
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock.connect(HOST_PORT)
+sock.sendall(cmd.encode())
+
+def cmd_short(cmd):
+    _, interval = cmd.split(':')
+    interval = int(interval)
+
+    def get_size_answer(num_got_answer):
+        base_size = 18
+        if num_got_answer == 0:
+            return base_size
+        return base_size + int(math.log10(num_answer))
+
+    num_answer = 0
+    while True:
+        size = get_size_answer(num_answer)
+        data = sock.recv(size).decode()
+        if data:
+            print(data)
+            num_answer += 1
+        else:
+            break
+
+def cmd_floodme(cmd):
+    i = 0
+    while True:
+        data = sock.recv(16).decode()
+        i += 1
+        if data:
+            print(data, end='')
+        else:
+            break
+    print(i)
+
+cmd_short_re = re.compile('CMD_short:\d+')
+match = cmd_short_re.match(cmd)
+if match:
+    cmd_short(cmd)
+elif cmd == 'CMD_floodme':
+    cmd_floodme(cmd)
+
+sock.close()

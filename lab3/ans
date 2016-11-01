@@ -1,0 +1,56 @@
+1
+a	Client because it doesn't bind to a port
+b	UDP, because of socket.SOCK_DGRAM
+
+2
+a	"Message sent"
+b	"Received data:  Hello, Romeo" and "From Address:  ('127.0.0.1', 38569)"
+
+3
+TCP because of socket.SOCK_STREAM, IPv4 because of socket.AF_INET (for IPv6, we
+would use SOCKET.AF_INET6 instead)
+
+4
+It shows the current state of the socket on the system, the columns shows some
+data on each. In order, there is: protocol, data received but not read yet, data
+send but not yet ack by the other side, the address it is bind to, the address
+it is connected to (in this case, none, because he is waiting for a client),
+the state in which he is (LISTEN in this case because he is waiting on a client
+to connect)
+
+5
+There is first the server socket waiting for new connections, then, there is the
+server socket of the new connection made by the client, finally, there is the
+client socket connected to the server
+
+6
+3 lines, you can change the number of line by changing the connection.recv() by
+another value than 16
+
+7
+No, because the socket isn't closed on the client side thus the
+connection.recv() still wait for some data
+
+8
+No, the listening socket is only used to generate new connections and for each
+new one, it will create a new socket 
+
+9
+20 messages, with either d=0 and d=1
+
+// TODO
+
+14
+ACT I
+SCENE I. Elsinore. A platform before the castle.
+FRANCISCO at his post. Enter to him BERNARDO
+BERNARDO
+Who's there?
+FRANCISCO
+Nay, answer me: stand, and unfold yourself.
+BERNARDO
+
+15
+1	71 times, recv size of 16
+2	// TODO
+3	the recv size // TODO
