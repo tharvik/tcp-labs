@@ -103,3 +103,17 @@ D.C.? The Presidential Seal.
 @229049: Your task is now completed. Congrats! Remember to upload your source
 code on Moodle! By the way, What do you call a pig that does karate? A pork
 chop.
+
+23
+11 websocket packets with part of the message received. Thus, it is different
+from the question from part 2.
+
+24
+20 times. The WebSocket are easier to handle than having to compute the size of
+the received message.
+
+25
+A single packet is carrying the message.
+The `on_message` is triggered once.
+The whole message can be read at once, not caring about the underling
+fragmentation.
