@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import re
+import math
+import socket
+import ssl
+import sys
+
+HOST_PORT = ('localhost', 5003)
+
+cmd, = sys.argv[1:]
+
+context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock = context.wrap_socket(sock)
+
+sock.connect(HOST_PORT)
+sock.sendall(cmd.encode())
+
+def get_size_answer(num_got_answer):
+    base_size = 18
+    if num_got_answer == 0:
+        return base_size
+    return base_size + int(math.log10(num_answer))
+
+num_answer = 0
+while True:
+    size = get_size_answer(num_answer)
+    data = sock.recv(size).decode()
+    if data:
+        print(data)
+        num_answer += 1
+    else:
+        break
+
+sock.close()

@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import re
+import math
+import socket
+import ssl
+import sys
+
+HOST_PORT = ('localhost', 5003)
+CERT = '229049_cert.pem'
+KEY = '229049_key.pem'
+
+context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+context.load_cert_chain(CERT, keyfile=KEY)
+
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server = context.wrap_socket(server)
+
+server.bind(HOST_PORT)
+server.listen(1)
+
+while True:
+    sock, _ = server.accept()
+
+    cmd = sock.read(11).decode()
+    if cmd != 'CMD_short:0':
+        sock.close()
+        continue
+
+    n = 20
+
+    for i in range(n):
+        ans = 'This is PMU data {}'.format(i).encode()
+        sock.sendall(ans)
+
+    sock.close()
+
+server.close()
