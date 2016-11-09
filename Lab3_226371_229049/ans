@@ -38,7 +38,22 @@ new one, it will create a new socket
 9
 20 messages, with either d=0 and d=1
 
-// TODO
+10
+1	2 packets, 18 bytes, 352 bytes
+2	20 packets, 10 with 18 bytes, 10 with 19 bytes
+
+11
+The rate of sending. In the first exemple, the server bufferize the data, as
+there is an high rate of input, in the second, the rate is lower and we still
+want reactivity, so it sends a packet by message. See Nagle's algorithm for more
+information.
+
+12
+There is a "FIN" flag in the stream from the server, which indicate that this
+the end of the data stream.
+
+13
+One, the whole data.
 
 14
 ACT I
@@ -51,15 +66,17 @@ Nay, answer me: stand, and unfold yourself.
 BERNARDO
 
 15
-1	71 times, recv size of 16
-2	// TODO
-3	the recv size // TODO
+1	71 times
+2	Nope, recv simply copy a certain number of byte from the kernel buffer
+3	The recv size which is of size 16
 
 16
 a	2016-11-09T11:15:33+0100
 b	IPv6
 
-17 // TODO
+17
+a	We send UDP 752 packets for 60 reply, so an average of 12.5 packets
+b	1 - 60 / 752 = 0.92
 
 18
 Romeo, come forth; come forth, thou fearful man:

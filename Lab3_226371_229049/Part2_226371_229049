@@ -49,5 +49,7 @@ if match:
     cmd_short(cmd)
 elif cmd == 'CMD_floodme':
     cmd_floodme(cmd)
+else:
+    exit(1)
 
 sock.close()

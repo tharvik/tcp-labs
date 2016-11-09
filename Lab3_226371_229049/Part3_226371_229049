@@ -29,6 +29,7 @@ def send_cmd(cmd):
             return data.decode()
 
         except OSError as e:
+            print(e)
             socket_type = socket.AF_INET6 if socket_type == socket.AF_INET else socket.AF_INET
             sock.close()
 
