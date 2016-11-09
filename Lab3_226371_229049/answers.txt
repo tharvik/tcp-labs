@@ -1,0 +1,119 @@
+1
+a	Client because it doesn't bind to a port
+b	UDP, because of socket.SOCK_DGRAM
+
+2
+a	"Message sent"
+b	"Received data:  Hello, Romeo" and "From Address:  ('127.0.0.1', 38569)"
+
+3
+TCP because of socket.SOCK_STREAM, IPv4 because of socket.AF_INET (for IPv6, we
+would use SOCKET.AF_INET6 instead)
+
+4
+It shows the current state of the socket on the system, the columns shows some
+data on each. In order, there is: protocol, data received but not read yet, data
+send but not yet ack by the other side, the address it is bind to, the address
+it is connected to (in this case, none, because he is waiting for a client),
+the state in which he is (LISTEN in this case because he is waiting on a client
+to connect)
+
+5
+There is first the server socket waiting for new connections, then, there is the
+server socket of the new connection made by the client, finally, there is the
+client socket connected to the server
+
+6
+3 lines, you can change the number of line by changing the connection.recv() by
+another value than 16
+
+7
+No, because the socket isn't closed on the client side thus the
+connection.recv() still wait for some data
+
+8
+No, the listening socket is only used to generate new connections and for each
+new one, it will create a new socket 
+
+9
+20 messages, with either d=0 and d=1
+
+10
+1	2 packets, 18 bytes, 352 bytes
+2	20 packets, 10 with 18 bytes, 10 with 19 bytes
+
+11
+The rate of sending. In the first exemple, the server bufferize the data, as
+there is an high rate of input, in the second, the rate is lower and we still
+want reactivity, so it sends a packet by message. See Nagle's algorithm for more
+information.
+
+12
+There is a "FIN" flag in the stream from the server, which indicate that this
+the end of the data stream.
+
+13
+One, the whole data.
+
+14
+ACT I
+SCENE I. Elsinore. A platform before the castle.
+FRANCISCO at his post. Enter to him BERNARDO
+BERNARDO
+Who's there?
+FRANCISCO
+Nay, answer me: stand, and unfold yourself.
+BERNARDO
+
+15
+1	71 times
+2	Nope, recv simply copy a certain number of byte from the kernel buffer
+3	The recv size which is of size 16
+
+16
+a	2016-11-09T11:15:33+0100
+b	IPv6
+
+17
+a	We send UDP 752 packets for 60 reply, so an average of 12.5 packets
+b	1 - 60 / 752 = 0.92
+
+18
+Romeo, come forth; come forth, thou fearful man:
+Affliction is enamour'd of thy parts,
+And thou art wedded to calamity.
+
+19
+SO_REUSEADDR to ensure that we received the packets, every socket will received
+the packet.
+IP_ADD_MEMBERSHIP to inform the kernel that we want to join this multicast group
+(as we use python, we have to do some tricks with struct).
+
+20
+It is simply the TTL of the multicast address. Usually set to one, so that the
+packets do not leave the local network.
+
+21
+No need, the defaults are enough.
+
+22
+@226371: Your task is now completed. Congrats! Remember to upload your source
+code on Moodle! By the way, What's gray, eats fish, and lives in Washington,
+D.C.? The Presidential Seal.
+@229049: Your task is now completed. Congrats! Remember to upload your source
+code on Moodle! By the way, What do you call a pig that does karate? A pork
+chop.
+
+23
+11 websocket packets with part of the message received. Thus, it is different
+from the question from part 2.
+
+24
+20 times. The WebSocket are easier to handle than having to compute the size of
+the received message.
+
+25
+A single packet is carrying the message.
+The `on_message` is triggered once.
+The whole message can be read at once, not caring about the underling
+fragmentation.
