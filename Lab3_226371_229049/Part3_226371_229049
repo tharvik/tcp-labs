@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+
+import math
+import re
+import socket
+import sys
+
+HOST_PORT = ('lab3.iew.epfl.ch', 5004)
+TIMEOUT = 1
+
+# TODO received message use ':' as separator, not '=' as in doc
+ans_re = re.compile('OFFSET:\d+')
+
+def send_cmd(cmd):
+    socket_type = socket.AF_INET6
+
+    while True:
+        try:
+            sock = socket.socket(socket_type, socket.SOCK_DGRAM)
+            sock.settimeout(TIMEOUT)
+
+            sock.sendto(cmd.encode(), HOST_PORT)
+
+            data, _ = sock.recvfrom(9)
+
+            sock.close()
+
+            print('connection with {!r}'.format(socket_type))
+            return data.decode()
+
+        except OSError as e:
+            socket_type = socket.AF_INET6 if socket_type == socket.AF_INET else socket.AF_INET
+            sock.close()
+
+ans_match = None
+while not ans_match:
+    ans = send_cmd('RESET:20')
+    print('got {}'.format(ans))
+    ans_match = ans_re.match(ans)

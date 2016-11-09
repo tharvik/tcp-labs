@@ -54,3 +54,35 @@ BERNARDO
 1	71 times, recv size of 16
 2	// TODO
 3	the recv size // TODO
+
+16
+a	2016-11-09T11:15:33+0100
+b	IPv6
+
+17 // TODO
+
+18
+Romeo, come forth; come forth, thou fearful man:
+Affliction is enamour'd of thy parts,
+And thou art wedded to calamity.
+
+19
+SO_REUSEADDR to ensure that we received the packets, every socket will received
+the packet.
+IP_ADD_MEMBERSHIP to inform the kernel that we want to join this multicast group
+(as we use python, we have to do some tricks with struct).
+
+20
+It is simply the TTL of the multicast address. Usually set to one, so that the
+packets do not leave the local network.
+
+21
+No need, the defaults are enough.
+
+22
+@226371: Your task is now completed. Congrats! Remember to upload your source
+code on Moodle! By the way, What's gray, eats fish, and lives in Washington,
+D.C.? The Presidential Seal.
+@229049: Your task is now completed. Congrats! Remember to upload your source
+code on Moodle! By the way, What do you call a pig that does karate? A pork
+chop.

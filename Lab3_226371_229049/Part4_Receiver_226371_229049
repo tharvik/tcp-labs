@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import math
+import re
+import socket
+import struct
+import sys
+
+HOST_PORT = ('224.1.1.1', 5005)
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+sock.bind(HOST_PORT)
+
+add_member_struct = struct.pack('4sl', socket.inet_aton(HOST_PORT[0]), socket.INADDR_ANY)
+sock.setsockopt(socket.SOL_SOCKET, socket.IP_ADD_MEMBERSHIP, add_member_struct)
+
+while True:
+    data = sock.recv(1024)
+    uid, msg = data[0:6].decode(), data[6:].decode()
+    print(msg)
