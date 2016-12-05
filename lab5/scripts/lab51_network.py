@@ -100,7 +100,7 @@ def run():
  		enable_red = False,
 		max_queue_size = None
     """
-    link_r1sw2.intf1.config( bw=10)
+    link_r1sw2.intf1.config( bw=3)
 
 
     net.start()
