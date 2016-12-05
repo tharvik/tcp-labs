@@ -48,3 +48,25 @@ Thus the total size is 432 + 1000 * 8 = 8432 bits
 9 ??? same as 5
 
 10 ??? same a 6
+
+11
+We take that the router will drop a packet regardless of the source, so we have
+that if the router received more paquet from h1, it will proportionnally drop
+more paquet from h1.
+actual_flow = min(capacity / (flow_h1 + flow_h2), 1) * flow_wanted
+goodput = actual_flow * useful_size / packet_size
+loss probability = 1 - actual_flow / max(flow_wanted, actual_flow).
+As the packet size is not known, we consider that it is useful as a whole
+(thus packet_size = useful_size).
+1 Mbps, 1 Mbps		1 Mbps		0%	1 Mbps		0%
+1 Mbps, 2 Mbps		1 Mbps		0%	2 Mbps		0%
+1 Mbps, 4.5 Mbps	0.55 Mbps	45%	2.45 Mbps	46%
+
+12
+1 Mbps, 1 Mbps		1 Mbps		0%	1 Mbps		0%
+1 Mbps, 2 Mbps		0.96 Mbps	0%	1.92 Mbps	0%
+1 Mbps, 4.5 Mbps	0.48 Mbps	47%	2.45 Mbps	45%
+
+13
+Some slight variation possibly due to the packet size versus useful size
+difference. The variation are kinda small anyway
