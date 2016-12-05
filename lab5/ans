@@ -70,3 +70,12 @@ As the packet size is not known, we consider that it is useful as a whole
 13
 Some slight variation possibly due to the packet size versus useful size
 difference. The variation are kinda small anyway
+
+14 ??? how to compute?
+
+15
+1 Mbps, 1 Mbps		1 Mbps		1 Mbps		819 kbps
+1 Mbps, 2 Mbps		905 kbps	1965 kbps	25 kbps
+1 Mbps, 4.5 Mbps	450 kbps	2500 kbps	3 kbps
+
+16 ??? depend on 14
