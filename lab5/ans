@@ -13,3 +13,38 @@ between r1 and sw2 (by reducing the bandwith of one of the interface).
 
 3
 9294 kbps
+
+4
+The ethernet header is 144 bits
+The IP header is 128 bits
+The UDP header is 64 bits
+So the overhead is 144 + 128 + 64 = 336 bits
+When the rate < 50 kbps: 336 + 125 * 8 = 1336 bits
+When the rate > 50 kbps: 336 + 1000 * 8 = 8336 bits
+With wireshark, we indeed have these total values
+
+5
+The size of application data divided by the total size multiplied by the
+bandwith
+8000 / 8336 * 3 = 2.879 Mbps
+
+6
+No loss and goodput of 100 kbps
+
+7
+3 Mbps:		loss of 0%, goodput of 2880 kbits
+10 Mbps:	loss of 70.9%, goodput of 2880 kbits
+This is coherent with the computed goodput
+
+8
+The ethernet header is 144 bits
+The IP header is 128 bits
+The TCP header is 160 bits
+So the overhead is 144 + 128 + 160 = 432 bits
+Thus the total size is 432 + 1000 * 8 = 8432 bits
+	??? data field is of size 2896 bytes -> frame size is 23696 bits
+	??? option field exists with 12 bytes
+
+9 ??? same as 5
+
+10 ??? same a 6
