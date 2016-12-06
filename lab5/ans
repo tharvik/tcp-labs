@@ -81,14 +81,15 @@ difference. The variation are kinda small anyway
 16 ??? depend on 14
 
 17
-source rate		521000 kbps
-RTT			7.5ms
-congestion window	3360
-
-17
 source rate		480000 kbps
 RTT			7.5ms
 congestion window	3032
 
 18
-It reduce the congestion window, which is excepted, but also
+source rate		458000 kbps
+RTT			7.5ms
+congestion window	542
+
+19
+The congestion window is smaller, which is excepted, but the rate is smaller
+too, which is weird ???
