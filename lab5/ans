@@ -83,4 +83,12 @@ difference. The variation are kinda small anyway
 17
 source rate		521000 kbps
 RTT			7.5ms
-congestion windows	3360
+congestion window	3360
+
+17
+source rate		480000 kbps
+RTT			7.5ms
+congestion window	3032
+
+18
+It reduce the congestion window, which is excepted, but also

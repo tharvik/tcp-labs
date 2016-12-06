@@ -6,7 +6,7 @@ This script creates the network environment for Lab5:
 - You need to choose either Topo1 or Topo2
 - XTerm window launched for all devices.
 """
-# Needed to check for display status 
+# Needed to check for display status
 import inspect
 import os
 
@@ -30,7 +30,7 @@ from mininet.node import Controller
 from mininet.log import setLogLevel, info
 
 # To launch xterm for each node
-from mininet.term import cleanUpScreens, makeTerms # for supporting copy/paste 
+from mininet.term import cleanUpScreens, makeTerms # for supporting copy/paste
 
 # Provides the mininet> prompt
 from mininet.cli import CLI
@@ -52,13 +52,13 @@ def run():
     info('** Creating an instance of Lab5 network topology\n')
     global net
     global hosts
-   
+
     net = Mininet(intf=TCIntf)
-   
-    
+
+
     info('\n** Adding Controller\n')
     net.addController( 'c0' )
-    
+
     info('\n** Adding Hosts\n')
     h1 = net.addHost('h1', ip='10.10.0.1/24', hostname='h1',  privateLogDir=True, privateRunDir=True, inMountNamespace=True, inPIDNamespace=True, inUTSNamespace=True)
     h2 = net.addHost('h2', ip='10.10.0.2/24', hostname='h2',  privateLogDir=True, privateRunDir=True, inMountNamespace=True, inPIDNamespace=True, inUTSNamespace=True)
@@ -69,14 +69,14 @@ def run():
     # Adding switches to the network
     sw1 = net.addSwitch('sw1')
     sw2 = net.addSwitch('sw2')
-    
+
     info('\n** Creating Links \n')
     link_h1sw1 = net.addLink( h1, sw1)
     link_h2sw1 = net.addLink( h2, sw1)
     link_h3sw2 = net.addLink( h3, sw2)
     link_r1sw1 = net.addLink( r1, sw1, intfName1='r1-eth0')
     link_r1sw2 = net.addLink( r1, sw2, intfName1='r1-eth1')
-    
+
     info('\n** Modifying Link Parameters \n')
     """
         Default parameters for links:
@@ -91,24 +91,24 @@ def run():
  		latency_ms = None,
  		enable_ecn = False,
  		enable_red = False,
- 		max_queue_size = None 
+		max_queue_size = None
     """
-    
+
     #Commands here for bandwidth and queue size
-    
-    
+    link_r1sw2.intf1.config(bw=5, max_queue_size=1000, enable_ecn=True)
+
     net.start()
-    
+
     info( '*** Configuring hosts\n' )
     r1.cmd('ifconfig r1-eth1 10.10.1.10 netmask 255.255.255.0')
     r1.cmd('echo 1 > /proc/sys/net/ipv4/ip_forward')
     h1.cmd('ip route add default via 10.10.0.10')
     h2.cmd('ip route add default via 10.10.0.10')
     h3.cmd('ip route add default via 10.10.1.10')
-   
+
     info('** Executing custom commands\n')
     output = net.nameToNode.keys
-    
+
 	#
 	#Enable Xterm window for every host
     info('** Enabling xterm for hosts only\n')
@@ -122,7 +122,7 @@ def run():
     # Mininet's function to create Xterms in hosts
     makeTerms( hosts, 'host' )
 
-	# Enable the mininet> prompt 
+	# Enable the mininet> prompt
     info('** Running CLI\n')
     CLI(net)
     info( '*** Closing the terminals on the hosts\n' )
@@ -130,7 +130,7 @@ def run():
     h2.cmd("killall xterm")
     h3.cmd("killall xterm")
     r1.cmd("killall xterm")
-    
+
     # This command stops the simulation
     net.stop()
     cleanUpScreens()
@@ -139,6 +139,6 @@ def run():
 if __name__ == '__main__':
     # Set the log level on terminal
     setLogLevel('info')
-    
+
     # Execute the script
     run()
