@@ -79,3 +79,8 @@ difference. The variation are kinda small anyway
 1 Mbps, 4.5 Mbps	450 kbps	2500 kbps	3 kbps
 
 16 ??? depend on 14
+
+17
+source rate		521000 kbps
+RTT			7.5ms
+congestion windows	3360
