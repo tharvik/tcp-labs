@@ -1,0 +1,112 @@
+11
+We take that the router will drop a packet regardless of the source, so we have
+that if the router received more paquet from h1, it will proportionnally drop
+more paquet from h1.
+actual_flow = min(capacity / (flow_h1 + flow_h2), 1) * flow_wanted
+goodput = actual_flow * useful_size / packet_size
+loss probability = 1 - actual_flow / max(flow_wanted, actual_flow).
+As the packet size is not known, we consider that it is useful as a whole
+(thus packet_size = useful_size).
+1 Mbps, 1 Mbps		1 Mbps		0%	1 Mbps		0%
+1 Mbps, 2 Mbps		1 Mbps		0%	2 Mbps		0%
+1 Mbps, 4.5 Mbps	0.55 Mbps	45%	2.45 Mbps	46%
+
+12
+1 Mbps, 1 Mbps		1 Mbps		0%	1 Mbps		0%
+1 Mbps, 2 Mbps		0.96 Mbps	0%	1.92 Mbps	0%
+1 Mbps, 4.5 Mbps	0.48 Mbps	47%	2.45 Mbps	45%
+
+13
+Some slight variation possibly due to the packet size versus useful size
+difference. The variation are kinda small anyway
+
+14 ??? how to compute?
+
+15
+1 Mbps, 1 Mbps		1 Mbps		1 Mbps		819 kbps
+1 Mbps, 2 Mbps		905 kbps	1965 kbps	25 kbps
+1 Mbps, 4.5 Mbps	450 kbps	2500 kbps	3 kbps
+
+16 ??? depend on 14
+
+17
+source rate		480000 kbps
+RTT			7.5ms
+congestion window	3032
+
+18
+source rate		458000 kbps
+RTT			7.5ms
+congestion window	542
+
+19
+The congestion window is smaller, which is excepted, but the rate is smaller
+too, which is weird ???
+
+20
+RTT of 300ms
+
+21
+maximisation of 3 * log(h1_h3) + log(h2_h3), with h1_h3 + h2_h3 <= 3 Mbps
+h1 goodput	2.25 Mbps
+h2 goodput	0.75 Mbps
+
+22 ???
+
+23 ???
+
+24 ???
+
+25 ??? there isn't any, right?
+
+26 ???
+
+27 ???
+
+28
+We try to allocate the same for all at first, which is 1 Mbps. With that, all
+pipes are used at max, so the allocation is max-min fair
+
+29
+maximisation of log(h1_h3) + log(h1_h2) + log(h2_h3) with
+h1_h3 + h1_h2 <= 2 Mbps
+h1_h3 + h2_h3 <= 2 Mbps
+h1_h3 = 2/3
+h1_h2 = h2_h3 = 4/3
+
+30
+1to2	100ms
+2to3	100ms
+1to3	100ms
+
+31 ???
+
+32 ???
+
+33 ???
+
+34 ???
+
+35 ??? how to forward?
+
+36
+\                 /
+ \ 1.25          / 2
+  \             /
+   -----2.5-----
+  /             \
+ / 1.25          \ 0.5
+/                 \
+Thus A and B will send at 1.25 Mbps
+
+37 ??? how to compute with common link?
+
+38 ???
+
+39 ???
+
+40 ???
+
+41 ???
+
+42 ???
