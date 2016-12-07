@@ -116,9 +116,11 @@ some delay
 
 25 ??? there isn't any, right?
 
-26 ???
+26
+D2	1.86 Mbps	0.9 Mbps
+D3	2.6 Mbps	0.1 Mbps
 
-27 ???
+27 ??? depends on 26
 
 28
 We try to allocate the same for all at first, which is 1 Mbps. With that, all
