@@ -102,11 +102,17 @@ maximisation of 3 * log(h1_h3) + log(h2_h3), with h1_h3 + h2_h3 <= 3 Mbps
 h1 goodput	2.25 Mbps
 h2 goodput	0.75 Mbps
 
-22 ???
+22
+h1 goodput	2.05 Mbps
+h2 goodput	0.68 Mbps
 
-23 ???
+23
+That correspond to the theory, minus variation due to stabilisation and useful
+size versus packet size
 
-24 ???
+24
+By looking at the RTT, we can see that it is usually 3000ms, so there should be
+some delay
 
 25 ??? there isn't any, right?
 
